@@ -1,33 +1,17 @@
-"use client";
-
 import { useState } from 'react';
-
-async function sendMessageToDatabase(message: string) {
-  try {
-    const response = await fetch('/api/send-message', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: uuidv4(), text: message }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to send message');
-    }
-
-    console.log('Message sent successfully!');
-  } catch (error) {
-    console.error('Error sending message:', error);
-  }
-}
+import { sendMessageToDatabase } from '../app/lib/data'; // Importando a função sendMessageToDatabase
 
 export default function Page() {
   const [message, setMessage] = useState('');
 
   const handleSendMessage = async () => {
-    await sendMessageToDatabase(message);
-    setMessage('');
+    try {
+      await sendMessageToDatabase(message);
+      setMessage('');
+      console.log('Message sent successfully!');
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
   };
 
   return (
