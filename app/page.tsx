@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 import { sendMessageToDatabase } from '../app/lib/data'; // Importando a função sendMessageToDatabase
 
