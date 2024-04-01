@@ -1,5 +1,10 @@
 import { sql } from '@vercel/postgres';
 import { MessageTable } from './definitions'; // Importando o tipo MessageTable
+import dotenv from 'dotenv';
+
+dotenv.config(); // Carrega as variáveis de ambiente do arquivo .env
+
+const client = new sql.Client({ connectionString: process.env.POSTGRES_URL });
 
 export async function sendMessageToDatabase(text: string): Promise<void> {
   try {
